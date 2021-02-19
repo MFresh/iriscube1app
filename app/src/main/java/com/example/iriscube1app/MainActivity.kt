@@ -37,10 +37,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
             setReorderingAllowed(true)
 
             setCustomAnimations(
-                R.anim.slide_from_above,
-                R.anim.fade_out,
-                0,
-                R.anim.slide_from_below
+                    R.anim.slide_from_above,
+                    R.anim.fade_out,
+                    0,
+                    R.anim.slide_from_below
             )
 
             val myArguments = Bundle()
@@ -64,13 +64,12 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
             setReorderingAllowed(true)
             setCustomAnimations(
                     R.anim.slide_from_right,
-                    0,
+                    R.anim.fade_out,
                     0,
                     R.anim.slide_from_left
             )
 
             addToBackStack(null)
-
             replace(R.id.fragment_container_view, PeopleListFragment())
 
         }

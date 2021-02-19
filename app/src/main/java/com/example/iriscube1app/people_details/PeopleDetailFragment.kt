@@ -46,8 +46,8 @@ class PeopleDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        detail_surname.text = person?.name
-        detail_name.text = person?.surname
+        detail_surname.text = person?.surname
+        detail_name.text = person?.name
         detail_age.text = person?.age.toString()
         detail_dateofbirth.text = person?.dateOfBirth.toString()
         detail_presence.text = person?.presence.toString()
