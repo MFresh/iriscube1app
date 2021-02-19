@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">Iriscube1App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="hello">Hello, this is a Fragment</string>
+
+    <string name="welcome">Welcome</string>
+    <string name="welcome_description">This application holds valuable information regarding Top Juventus players of the 2000s</string>
+
+    <string name="person_name">Matteo</string>
+    <string name="person_surname">Fresco</string>
+    <string name="person_age">25</string>
+    <string name="person_dateofbirth">21/12/1995</string>
+    <string name="person_presence">1</string>
+
+    <string name="label_name">Name</string>
+    <string name="label_surname">Surname</string>
+    <string name="label_age">Age</string>
+    <string name="label_dateofbirth">Date Of Birth</string>
+    <string name="label_presence">Number Of Presences</string>
+
+    <string name="button_back">BACK</string>
+    <string name="button_see_details">SEE</string>
+    <string name="button_enter">ENTER</string>
+
+</resources>
