@@ -12,10 +12,11 @@ import com.example.iriscube1app.viewmodels.PeopleViewModel
 
 class PeopleAdapter(myContext: PeopleListFragment, myViewModel: PeopleViewModel) : RecyclerView.Adapter<PeopleAdapter.PeopleViewHolder>() {
 
-    var context = myContext
-    val viewModel = myViewModel
+    // GLOBAL VARIABLES
+    private var context = myContext
+    private val viewModel = myViewModel
 
-
+    // INTERFACE
     interface PeopleAdapterListener {
         fun onPersonDetailClickedAdapter(myPerson: PersonClass)
     }
@@ -52,7 +53,6 @@ class PeopleAdapter(myContext: PeopleListFragment, myViewModel: PeopleViewModel)
     override fun onBindViewHolder(viewHolder: PeopleViewHolder, position: Int) {
 
 
-        //viewHolder.nameTextView.text = dataSet[position].name
         viewHolder.nameTextView.text = viewModel.myData[position].name
         viewHolder.surnameTextView.text = viewModel.myData[position].surname
         viewHolder.ageTextView.text = viewModel.myData[position].age.toString()
@@ -60,7 +60,6 @@ class PeopleAdapter(myContext: PeopleListFragment, myViewModel: PeopleViewModel)
         viewHolder.seeDetailButton.setOnClickListener {
             context.onPersonDetailClickedAdapter(viewModel.myData[position])
         }
-
 
     }
 

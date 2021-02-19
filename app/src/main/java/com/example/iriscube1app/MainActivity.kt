@@ -9,13 +9,13 @@ import com.example.iriscube1app.people_details.PeopleDetailFragment
 import com.example.iriscube1app.people_list.PeopleListFragment
 import com.example.iriscube1app.people_list.PersonClass
 
-class MainActivity : AppCompatActivity(R.layout.activity_main), PeopleListFragment.PeopleFragmentListener {
+class MainActivity : AppCompatActivity(R.layout.activity_main),
+                     PeopleListFragment.PeopleListFragmentListener,
+                     HomepageFragment.HomepageFragmentListener{
 
 
-    companion object {
-        val personIndexForBundle : String = "PERSON"
-    }
 
+    // OVERRIDE METHODS
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), PeopleListFragme
         setContentView(R.layout.activity_main)
     }
 
+    // OVERRIDE INTERFACE PEOPLE_LIST_LISTENER
     override fun onPersonDetailClickedFragment(myPerson: PersonClass) {
 
         supportFragmentManager.commit{
@@ -37,19 +38,41 @@ class MainActivity : AppCompatActivity(R.layout.activity_main), PeopleListFragme
 
             setCustomAnimations(
                 R.anim.slide_from_above,
-                0,
+                R.anim.fade_out,
                 0,
                 R.anim.slide_from_below
             )
 
             val myArguments = Bundle()
-            myArguments.putParcelable(personIndexForBundle, myPerson)
+            myArguments.putParcelable(PeopleDetailFragment.personIndexForBundle, myPerson)
 
             val newDetailFragment = PeopleDetailFragment()
             newDetailFragment.arguments = myArguments
 
             addToBackStack(null)
             replace(R.id.fragment_container_view, newDetailFragment)
+        }
+
+    }
+
+    // OVERRIDE INTERFACE HOMEPAGE_LISTENER METHOD
+    override fun onEnterButtonClicked() {
+
+
+        supportFragmentManager.commit{
+
+            setReorderingAllowed(true)
+            setCustomAnimations(
+                    R.anim.slide_from_right,
+                    0,
+                    0,
+                    R.anim.slide_from_left
+            )
+
+            addToBackStack(null)
+
+            replace(R.id.fragment_container_view, PeopleListFragment())
+
         }
 
     }

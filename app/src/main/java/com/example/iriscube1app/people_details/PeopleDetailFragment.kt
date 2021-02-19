@@ -20,8 +20,8 @@ class PeopleDetailFragment : Fragment() {
     private var person : PersonClass? = null
 
     companion object {
-        val personIndexForBundle : String = "PERSON"
-        val exceptionNoPersonArgument : String = "Error: no values present"
+        const val personIndexForBundle : String = "PERSON"
+        const val exceptionNoPersonArgument : String = "Error: no values present"
     }
 
     override fun onCreateView(
@@ -53,19 +53,6 @@ class PeopleDetailFragment : Fragment() {
         detail_presence.text = person?.presence.toString()
 
         back_to_list_button.setOnClickListener{
-
-            /*
-
-            requireActivity().supportFragmentManager.commit {
-                setCustomAnimations(
-                    R.anim.slide_from_above,
-                    R.anim.fade_out,
-                    R.anim.slide_from_above,
-                    R.anim.fade_out)
-            }
-
-
-             */
 
             requireActivity().supportFragmentManager.popBackStack()
 

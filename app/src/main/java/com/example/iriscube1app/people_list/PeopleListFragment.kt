@@ -1,7 +1,6 @@
 package com.example.iriscube1app.people_list
 
 import android.content.Context
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,29 +9,38 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.iriscube1app.MainActivity
 import com.example.iriscube1app.R
 import com.example.iriscube1app.viewmodels.PeopleViewModel
 
-
-private lateinit var recyclerView: RecyclerView
-
 class PeopleListFragment : Fragment(), PeopleAdapter.PeopleAdapterListener {
 
-    private var listener: PeopleFragmentListener? = null
+
+    // GLOBAL VARIABLES
+    private lateinit var recyclerView: RecyclerView
+    private var listener: PeopleListFragmentListener? = null
     private val myPeopleVM : PeopleViewModel by activityViewModels()
 
-    interface PeopleFragmentListener{
+
+    // COMPANION OBJECT
+    companion object{
+        const val exceptionNoListenerInterface : String = "Must implement Listener!"
+    }
+
+    // INTERFACES
+    interface PeopleListFragmentListener{
         fun onPersonDetailClickedFragment(myPerson: PersonClass)
     }
 
+
+    // OVERRIDE METHODS
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        if(context is PeopleFragmentListener)
+        // check if the interface has been implemented
+        if(context is PeopleListFragmentListener)
             listener = context
         else
-            throw Exception("Must implement Listener!")
+            throw Exception(exceptionNoListenerInterface)
 
     }
 
@@ -40,15 +48,14 @@ class PeopleListFragment : Fragment(), PeopleAdapter.PeopleAdapterListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_people_list, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        // set up RecyclerView for PeopleList
         recyclerView = view.findViewById(R.id.people_recycler_view);
         recyclerView.layoutManager = LinearLayoutManager(this.context)
         recyclerView.setHasFixedSize(true)
@@ -57,6 +64,7 @@ class PeopleListFragment : Fragment(), PeopleAdapter.PeopleAdapterListener {
 
     }
 
+    // OVERRIDE INTERFACE PEOPLE_ADAPTER_LISTENER METHOD
     override fun onPersonDetailClickedAdapter(myPerson: PersonClass) {
         listener?.onPersonDetailClickedFragment(myPerson)
     }
