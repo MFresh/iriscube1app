@@ -8,13 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.iriscube1app.R
+import com.example.iriscube1app.interfaces.MainContract
+import com.example.iriscube1app.presenters.PeoplePresenter
 import com.example.iriscube1app.viewmodels.PeopleViewModel
 
-class PeopleAdapter(myContext: PeopleListFragment, myViewModel: PeopleViewModel) : RecyclerView.Adapter<PeopleAdapter.PeopleViewHolder>() {
+class PeopleAdapter(myContext: PeopleListFragment, myPeopleList: List<PersonClass>) : RecyclerView.Adapter<PeopleAdapter.PeopleViewHolder>() {
 
     // GLOBAL VARIABLES
-    private var context = myContext
-    private val viewModel = myViewModel
+    var context = myContext
+    var peopleList = myPeopleList
 
     // INTERFACE
     interface PeopleAdapterListener {
@@ -52,20 +54,24 @@ class PeopleAdapter(myContext: PeopleListFragment, myViewModel: PeopleViewModel)
     // Replace the contents of a view (invoked by the layout manager)
     override fun onBindViewHolder(viewHolder: PeopleViewHolder, position: Int) {
 
+            viewHolder.nameTextView.text = peopleList[position].name
+            viewHolder.surnameTextView.text = peopleList[position].surname
+            viewHolder.ageTextView.text = peopleList[position].age.toString()
 
-        viewHolder.nameTextView.text = viewModel.myData[position].name
-        viewHolder.surnameTextView.text = viewModel.myData[position].surname
-        viewHolder.ageTextView.text = viewModel.myData[position].age.toString()
+            viewHolder.seeDetailButton.setOnClickListener {
+                context.onPersonDetailClickedAdapter(peopleList[position])
+            }
 
-        viewHolder.seeDetailButton.setOnClickListener {
-            context.onPersonDetailClickedAdapter(viewModel.myData[position])
-        }
 
     }
 
     // Return the size of your dataset (invoked by the layout manager)
-    override fun getItemCount() = viewModel.myData.size
+    override fun getItemCount() = peopleList.size
 
+
+    fun updateList(newList: List<PersonClass>){
+        this.peopleList = newList
+    }
 
 
 }
